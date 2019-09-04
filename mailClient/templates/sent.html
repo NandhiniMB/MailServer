@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+        <h1 class="h2 first">Sent Mail</h1>
+    </div>
+    <div class="table-responsive first">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">To</th>
+                    <th scope="col">Subject</th>
+                    <!-- <th scope="col">Message</th> -->
+                    <th scope="col">Date Sent</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for result in res %}
+                <tr class='clickable-row' data-id='{{ result.id }}'>
+                    <td scope="row">{{ result.recipient_email }}</td>
+                    <td>{{ result.subject }}</td>
+                    <!-- <td>{{ result.text }}</td> -->
+                    <td>{{ result.date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+            <div style="display: block;" class="second" id="0">
+                <a class="nav-link" href="/sent/">
+                    <span data-feather="arrow-left-circle" class="back"></span>
+                    <span class="backText">Back</span>
+                </a>
+                <hr>
+            </div>
+            
+                {% for result in res %}
+                <div class="view-mail second" id="{{ result.id }}">
+                    <p><span>To: </span> {{ result.recipient_email }}</p>
+                    <p><span>Sent on: </span>{{ result.date }}</p>
+                    <p><span>Subject: </span> {{ result.subject }}</p>
+                    <p><span>Message: </span></p>
+                    <p>{{ result.text }}</p>
+                    <p><span>Attachment: </span><a href="/media/{{ result.attachment }}">{{ result.attachment }}</a></p>
+                    <hr>
+                </div>
+                {% endfor %}
+
+{% endblock %}
+                
+              
